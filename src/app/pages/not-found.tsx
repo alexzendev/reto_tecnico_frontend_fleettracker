@@ -1,5 +1,5 @@
-import { Button } from "@/shared/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
@@ -11,10 +11,13 @@ export default function NotFound() {
       <p className="lg:text-sm sm:text-xs text-1.5xs text-center mb-5">
         Lo sentimos, la página que buscas no existe.
       </p>
-      <Button>
+      <Link
+        to="/"
+        className="bg-primary hover:bg-secondary text-stone-100 px-5 py-2.5 rounded-full sm:text-xs text-1.5xs uppercase font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all duration-200 group"
+      >
         Volver al inicio
         <ArrowRight className="size-3.5 group-hover:-rotate-45 transition-all duration-200" />
-      </Button>
+      </Link>
     </section>
   );
 }
