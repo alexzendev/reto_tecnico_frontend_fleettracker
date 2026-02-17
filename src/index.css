@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1e40af;
+  --color-primary: #3274ba;
+  --color-secondary: #012750;
+
+  --text-1.5xs: 0.6875rem;
+  --text-1.5xs--line-height: calc(0.8125 / 0.6875);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
 }
