@@ -8,7 +8,7 @@
 
   --text-1.5xs: 0.6875rem;
   --text-1.5xs--line-height: calc(0.8125 / 0.6875);
-  
+
   --text-2xs: 0.625rem;
   --text-2xs--line-height: calc(0.75 / 0.625);
 }
