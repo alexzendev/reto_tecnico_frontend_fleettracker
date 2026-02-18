@@ -1,5 +1,6 @@
 import { useTheme } from "@/shared/hooks/useTheme";
 import { Monitor, Moon, Sun } from "lucide-react";
+import { Divider } from "../ui/divider";
 
 export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
@@ -11,24 +12,28 @@ export const ThemeToggle = () => {
   ] as const;
 
   return (
-    <div>
-        <p></p>
-        <div className="flex flex-col">
-      {buttons.map((btn) => (
-        <button
-          key={btn.label}
-          onClick={() => setTheme(btn.value)}
-          className="flex items-center hover:bg-stone-200 dark:hover:bg-stone-800 transition-colors cursor-pointer w-full p-2 disabled:cursor-not-allowed disabled:hover:bg-transparent"
-          title={`Cambiar a modo ${btn.label}`}
-          disabled={theme === btn.value}
-        >
-          <btn.icons
-            className={`size-3.5 shrink-0 ${theme === btn.value ? "text-primary" : "text-stone-500 dark:text-stone-400"}`}
-          />
-          <span className="text-1.5xs">{btn.label}</span>
-        </button>
-      ))}
-    </div>
-    </div>
+    <>
+      <Divider text="Aspecto" />
+      <div className="flex flex-col py-4">
+        {buttons.map((btn) => (
+          <button
+            key={btn.label}
+            onClick={() => setTheme(btn.value)}
+            className="flex items-center lg:gap-2 gap-1 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-md transition-colors duration-200 cursor-pointer w-full p-2 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            aria-label={`Cambiar a tema ${btn.label}`}
+            disabled={theme === btn.value}
+          >
+            <btn.icons
+              className={`size-3.5 shrink-0 ${theme === btn.value ? "text-primary" : ""}`}
+            />
+            <span
+              className={`lg:text-xs text-1.5xs ${theme === btn.value ? "text-primary font-medium" : ""}`}
+            >
+              {btn.label}
+            </span>
+          </button>
+        ))}
+      </div>
+    </>
   );
 };
