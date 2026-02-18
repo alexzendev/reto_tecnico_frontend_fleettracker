@@ -5,10 +5,12 @@ import NotFound from "./app/pages/not-found";
 import NewVehicle from "./app/pages/new-vehicle";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "sonner";
+import { useTheme } from "./shared/hooks/useTheme";
 
 const queryClient = new QueryClient();
 
 function App() {
+  useTheme();
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
