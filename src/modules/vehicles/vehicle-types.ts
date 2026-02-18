@@ -1,10 +1,10 @@
 import type { QueryParams } from "@/shared/types/api-service-types";
 
 type VehicleState =
-  | "disponible"
-  | "en ruta"
-  | "en mantenimiento"
-  | "fuera de servicio";
+  | "Disponible"
+  | "En ruta"
+  | "En mantenimiento"
+  | "Fuera de servicio";
 
 export interface Vehicle {
   id: string;
