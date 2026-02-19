@@ -19,7 +19,7 @@ export const Sidebar = () => {
       )}
 
       <aside
-        className={`top-0 h-svh flex flex-col bg-stone-50 dark:bg-stone-900 border-r border-stone-200 dark:border-stone-700 transition-[width] duration-200 ease-in-out ${isSidebarOpen ? "lg:w-64 sm:w-60 w-56 sm:sticky fixed" : "sm:w-16 w-12 sticky"}
+        className={`sm:sticky fixed top-0 h-svh flex flex-col bg-stone-50 dark:bg-stone-900 border-r border-stone-200 dark:border-stone-700 transition-[width] duration-200 ease-in-out ${isSidebarOpen ? "lg:w-64 sm:w-60 w-56" : "sm:w-16 w-12"}
         `}
       >
         <div className="flex flex-col flex-1">
