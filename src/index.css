@@ -13,6 +13,24 @@
   --text-2xs--line-height: calc(0.75 / 0.625);
 }
 
+@utility autofill-input {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-stone-800);
+    box-shadow: inset 0 0 0 1000px var(--color-stone-100);
+  }
+}
+
+@utility autofill-input-dark {
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-stone-200);
+    box-shadow: inset 0 0 0 1000px var(--color-stone-800);
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-color: var(--color-primary) var(--color-stone-200);
