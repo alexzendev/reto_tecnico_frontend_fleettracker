@@ -1,0 +1,31 @@
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+
+interface CoomingSoonProps {
+  readonly title: string;
+}
+
+export default function CoomingSoon({ title }: CoomingSoonProps) {
+  return (
+    <main className="min-h-[calc(100vh-5rem)] flex flex-col bg-stone-50 dark:bg-stone-900 text-stone-800 dark:text-stone-200 sm:px-4 px-2 py-4">
+      <section className="flex flex-col items-center justify-center flex-1">
+        <span className="lg:text-lg sm:text-base text-sm font-semibold text-primary text-center">
+          En construcción
+        </span>
+        <h1 className="lg:text-2xl sm:text-xl text-lg text-center font-bold">
+          Próximamente {title}
+        </h1>
+        <p className="lg:text-sm sm:text-xs text-1.5xs text-center mb-5 max-w-72">
+          Estamos trabajando para que puedas acceder pronto.
+        </p>
+        <Link
+          to="/"
+          className="bg-primary hover:bg-secondary text-stone-100 px-5 py-2.5 rounded-full sm:text-1.5xs text-2xs uppercase font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all duration-200 group"
+        >
+          Volver vehiculos
+          <ArrowRight className="size-3.5 group-hover:-rotate-45 transition-all duration-200" />
+        </Link>
+      </section>
+    </main>
+  );
+}
