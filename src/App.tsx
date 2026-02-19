@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./app/pages/home";
 import { Layout } from "./app/layout/layout";
 import NotFound from "./app/pages/not-found";
@@ -14,14 +14,15 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
+        <Routes>
+          <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/vehicles" replace />} />x
+            <Route path="/vehicles" element={<Home />} />
             <Route path="/vehicles/new" element={<NewVehicle />} />
             <Route path="/vehicles/:id" element={<div>Vehicle Details</div>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </BrowserRouter>
       <Toaster richColors position="top-center" />
     </QueryClientProvider>
