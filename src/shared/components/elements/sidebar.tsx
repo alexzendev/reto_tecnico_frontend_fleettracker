@@ -14,18 +14,20 @@ export const Sidebar = () => {
 
   return (
     <div className="z-50">
-      {isSidebarOpen && <div className="fixed sm:hidden inset-0 bg-black/50" />}
+      {isSidebarOpen && (
+        <div className="fixed sm:hidden inset-0 bg-black/50 backdrop-blur-md" />
+      )}
 
       <aside
-        className={`top-0 h-svh flex flex-col bg-stone-50 dark:bg-stone-900 border-r border-stone-200 dark:border-stone-700 transition-[width] duration-300 ease-in-out ${isSidebarOpen ? "lg:w-64 sm:w-60 w-56 sm:sticky fixed" : "sm:w-16 w-12 sticky"}
+        className={`top-0 h-svh flex flex-col bg-stone-50 dark:bg-stone-900 border-r border-stone-200 dark:border-stone-700 transition-[width] duration-200 ease-in-out ${isSidebarOpen ? "lg:w-64 sm:w-60 w-56 sm:sticky fixed" : "sm:w-16 w-12 sticky"}
         `}
       >
         <div className="flex flex-col flex-1">
-          <div className="relative flex justify-center h-40">
+          <div className="relative flex justify-center h-44">
             {isSidebarOpen ? (
               <Imagotipo className="w-32" />
             ) : (
-              <Isotipo className="w-8" />
+              <Isotipo className="sm:w-8 w-7" />
             )}
           </div>
 
@@ -43,17 +45,17 @@ export const Sidebar = () => {
                 <NavLink
                   to={item.path}
                   className={({ isActive }) =>
-                    `flex items-center lg:gap-2 gap-1 rounded-md transition-colors duration-200 cursor-pointer w-full lg:p-2 p-1.5 ${
+                    `flex items-center lg:gap-2 gap-1 rounded-md transition-colors duration-200 w-full lg:p-2 p-1.5 ${
                       isActive
-                        ? "text-primary font-medium"
-                        : "hover:bg-stone-200 dark:hover:bg-stone-800"
+                        ? "text-primary font-medium cursor-default"
+                        : "hover:bg-stone-200 dark:hover:bg-stone-800 cursor-pointer"
                     }`
                   }
                   end
                 >
                   <item.icon className="size-4 shrink-0" />
                   <span
-                    className={`lg:text-xs text-1.5xs whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${isSidebarOpen ? "opacity-100 max-w-xs" : "opacity-0 max-w-0"}`}
+                    className={`lg:text-xs text-1.5xs whitespace-nowrap overflow-hidden transition-all duration-200 ease-in-out ${isSidebarOpen ? "opacity-100 max-w-xs" : "opacity-0 max-w-0"}`}
                   >
                     {item.label}
                   </span>
@@ -71,12 +73,12 @@ export const Sidebar = () => {
               </span>
             </div>
             <div
-              className={`min-w-0 flex-1 overflow-hidden transition-all duration-300 ease-in-out ${isSidebarOpen ? "opacity-100 max-w-xs" : "opacity-0 max-w-0"}`}
+              className={`min-w-0 flex-1 overflow-hidden transition-all duration-200 ease-in-out ${isSidebarOpen ? "opacity-100 max-w-xs" : "opacity-0 max-w-0"}`}
             >
               <h2 className="lg:text-xs text-1.5xs font-semibold truncate">
                 {user.email}
               </h2>
-              <p className="lg:text-1.5xs text-2xs text-stone-500 dark:text-stone-400">
+              <p className="lg:text-1.5xs text-2xs text-stone-500 dark:text-stone-400 capitalize">
                 {user.role}
               </p>
             </div>
@@ -92,7 +94,7 @@ export const Sidebar = () => {
             >
               <LogOut className="size-4 shrink-0" />
               <span
-                className={`lg:text-xs text-1.5xs whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${isSidebarOpen ? "opacity-100 max-w-xs" : "opacity-0 max-w-0"}`}
+                className={`lg:text-xs text-1.5xs whitespace-nowrap overflow-hidden transition-all duration-200 ease-in-out ${isSidebarOpen ? "opacity-100 max-w-xs" : "opacity-0 max-w-0"}`}
               >
                 Cerrar sesión
               </span>
