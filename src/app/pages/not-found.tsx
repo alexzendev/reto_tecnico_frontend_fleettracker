@@ -11,8 +11,8 @@ export default function NotFound() {
         </div>
       </header>
       <section className="flex flex-col items-center justify-center flex-1">
-        <span className="lg:text-xl sm:text-lg text-base font-bold text-primary text-center">404</span>
-        <h1 className="lg:text-2xl sm:text-xl text-lg text-center font-semibold">
+        <span className="lg:text-base sm:text-sm text-xs font-medium text-primary text-center tracking-tighter">404</span>
+        <h1 className="lg:text-3xl sm:text-2xl text-xl text-center font-bold tracking-tight">
           Página no encontrada
         </h1>
         <p className="lg:text-sm sm:text-xs text-1.5xs text-center mb-5">
