@@ -13,6 +13,35 @@
   --text-2xs--line-height: calc(0.75 / 0.625);
 }
 
+html {
+  scroll-behavior: smooth;
+  scrollbar-color: var(--color-primary) var(--color-stone-200);
+  scrollbar-width: thin;
+}
+
+html.dark {
+  scrollbar-color: var(--color-primary) var(--color-stone-800);
+}
+
 body {
   font-family: "Poppins", sans-serif;
+}
+
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-stone-200);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+  }
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    background: var(--color-stone-800);
+  }
 }
