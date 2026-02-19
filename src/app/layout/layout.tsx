@@ -1,15 +1,29 @@
 import { Header } from "@/shared/components/elements/header";
 import { Sidebar } from "@/shared/components/elements/sidebar";
+import { uiStore } from "@/shared/stores/ui-store";
+import { PanelLeftClose } from "lucide-react";
+import { Outlet } from "react-router-dom";
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
+export const Layout = () => {
+  const { isSidebarOpen, toggleSidebar } = uiStore();
   return (
-    <div className="bg-stone-50 dark:bg-stone-900 text-stone-800 dark:text-stone-200">
-      <Header />
-      <main className="mx-2 flex">
-        <div className="container mx-auto border-x border-stone-200 dark:border-stone-700 flex min-h-[calc(100vh-4rem)]">
+    <div className="bg-stone-50 dark:bg-stone-900 text-stone-800 dark:text-stone-200 min-h-svh">
+      <main>
+        <section className="flex flex-row w-full">
           <Sidebar />
-          <section>{children}</section>
-        </div>
+          <div className="w-full realative">
+            <button
+              onClick={toggleSidebar}
+              className="fixed top-3 left-3 z-50 cursor-pointer hover:bg-stone-200 dark:hover:bg-stone-800 rounded-md p-1"
+            >
+              <PanelLeftClose
+                className={`size-5 ${isSidebarOpen ? "" : "rotate-180"}`}
+              />
+            </button>
+            <Header />
+            <Outlet />
+          </div>
+        </section>
       </main>
     </div>
   );
