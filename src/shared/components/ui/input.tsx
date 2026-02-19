@@ -10,7 +10,10 @@ export const Input = forwardRef<HTMLInputElement, FormInputProps>(
     return (
       <div className="flex flex-col gap-1 w-full">
         {label && (
-          <label className="sm:text-xs text-1.5xs uppercase font-semibold">
+          <label
+            htmlFor={props.id || props.name}
+            className="sm:text-xs text-1.5xs uppercase font-semibold"
+          >
             {label}
           </label>
         )}
