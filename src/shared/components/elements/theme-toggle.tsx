@@ -22,7 +22,7 @@ export const ThemeToggle = () => {
           >
             <button
               onClick={() => setTheme(btn.value as "light" | "dark" | "system")}
-              className={`flex items-center lg:gap-2 gap-1 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-md transition-colors duration-200 cursor-pointer w-full lg:p-2 p-1.5 disabled:cursor-not-allowed disabled:hover:bg-transparent ${theme === btn.value ? "text-primary font-medium" : ""}`}
+              className={`flex items-center lg:gap-2 gap-1 hover:bg-stone-200 dark:hover:bg-stone-800 rounded-md transition-colors duration-200 cursor-pointer w-full lg:p-2 p-1.5 disabled:cursor-default disabled:hover:bg-transparent ${theme === btn.value ? "text-primary font-medium" : ""}`}
               aria-label={`Cambiar a tema ${btn.label}`}
               disabled={theme === btn.value}
             >
