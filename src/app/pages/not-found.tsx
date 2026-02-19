@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <main className="min-h-svh flex flex-col bg-stone-50 dark:bg-stone-900 text-stone-800 dark:text-stone-200">
+    <main className="min-h-svh flex flex-col bg-stone-50 dark:bg-stone-900 text-stone-800 dark:text-stone-200 sm:px-4 px-2 py-4">
       <header className="h-16 border-b border-stone-200 dark:border-stone-700">
         <div className="container mx-auto flex justify-center items-center h-full">
           <Imagotipo className="w-40" />
