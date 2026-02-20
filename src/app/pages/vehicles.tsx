@@ -5,6 +5,7 @@ import {
   getCoreRowModel,
   flexRender,
   type ColumnDef,
+  type CellContext,
 } from "@tanstack/react-table";
 import { Header } from "@/shared/components/elements/header";
 import type { Vehicle, VehicleFilters } from "@/modules/vehicles/vehicle-types";
@@ -13,19 +14,36 @@ import { Input } from "@/shared/components/ui/input";
 import { Select } from "@/shared/components/ui/select";
 import { DATA_UI } from "@/shared/utils/data-ui";
 import { Pagination } from "@/shared/components/elements/pagination";
+import { EmptyState, ErrorState } from "@/shared/components/elements/states";
+import { Highlight } from "@/shared/components/ui/highlight";
 
-const createColumns: ColumnDef<Vehicle>[] = [
+interface TableMeta {
+  search: string;
+}
+
+function HighlightCell({
+  getValue,
+  table,
+}: Readonly<CellContext<Vehicle, unknown>>) {
+  const { search } = table.options.meta as TableMeta;
+  return <Highlight query={search} text={getValue() as string} />;
+}
+
+const columns: ColumnDef<Vehicle>[] = [
   {
     accessorKey: "plate",
     header: "Placa",
+    cell: HighlightCell,
   },
   {
     accessorKey: "brand",
     header: "Marca",
+    cell: HighlightCell,
   },
   {
     accessorKey: "model",
     header: "Modelo",
+    cell: HighlightCell,
   },
   {
     accessorKey: "year",
@@ -50,10 +68,18 @@ export default function Vehicles() {
     limit: 10,
   });
 
-  const vehicles = data?.data ?? [];
-  const totalPages = data?.totalPages ?? 1;
+  const vehicles = useMemo(() => {
+    if (!search.trim()) return data?.data ?? [];
+    const lower = search.toLowerCase();
+    return (data?.data ?? []).filter(
+      (v) =>
+        v.plate.toLowerCase().includes(lower) ||
+        v.brand.toLowerCase().includes(lower) ||
+        v.model.toLowerCase().includes(lower),
+    );
+  }, [data?.data, search]);
 
-  const columns = useMemo(() => createColumns, []);
+  const totalPages = data?.totalPages ?? 1;
 
   const table = useReactTable({
     data: vehicles,
@@ -61,6 +87,7 @@ export default function Vehicles() {
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     pageCount: totalPages,
+    meta: { search } satisfies TableMeta,
   });
 
   const renderContent = () => {
@@ -69,11 +96,7 @@ export default function Vehicles() {
     }
 
     if (isError) {
-      return (
-        <p className="text-center py-10 text-red-500">
-          Error al cargar vehículos
-        </p>
-      );
+      return <ErrorState message="Hubo un problema al cargar los vehículos" />;
     }
 
     return (
@@ -102,9 +125,9 @@ export default function Vehicles() {
             </thead>
             <tbody className="divide-y divide-stone-200 dark:divide-stone-700">
               {vehicles.length === 0 ? (
-                <tr>
+                <tr className="flex-1">
                   <td colSpan={columns.length} className="text-center py-5">
-                    No se encontraron vehículos
+                    <EmptyState message="No se encontraron vehículos" />
                   </td>
                 </tr>
               ) : (
@@ -137,10 +160,10 @@ export default function Vehicles() {
   };
 
   return (
-    <div>
+    <div className="min-h-svh flex flex-col">
       <Header title="Vehículos" />
-      <div className="lg:p-4 p-2">
-        <div className="sm:space-y-4 space-y-2">
+      <div className="flex-1 flex flex-col">
+        <div className="lg:p-4 p-2 sm:space-y-4 space-y-2 border-b border-stone-200 dark:border-stone-700">
           <div className="flex justify-end">
             <Link
               to="/vehicles/new"
@@ -177,7 +200,7 @@ export default function Vehicles() {
           </div>
         </div>
 
-        {renderContent()}
+        <div className="lg:p-4 p-2 flex flex-col flex-1">{renderContent()}</div>
       </div>
     </div>
   );
