@@ -3,16 +3,27 @@ import { API_SERVICE } from "@/shared/services/api-service";
 import type { Vehicle, VehicleFilters } from "./vehicle-types";
 import { v4 as uuidv4 } from "uuid";
 
-export const getVehiclesService = (params?: VehicleFilters) => {
-  return API_SERVICE.GET<Vehicle[]>(API_ENDPOINTS.VEHICLES, params);
+export const getVehiclesService = async (params?: VehicleFilters) => {
+  const { data, headers } = await API_SERVICE.GET<Vehicle[]>(
+    API_ENDPOINTS.VEHICLES,
+    {
+      _page: params?.page ?? 1,
+      _limit: params?.limit ?? 10,
+      q: params?.q,
+      status: params?.status,
+    },
+  );
+
+  const total = Number(headers.get("X-Total-Count")) || 0;
+  return { data, total, totalPages: Math.ceil(total / (params?.limit ?? 10)) };
 };
 
 export const createVehicleService = (body: Omit<Vehicle, "id">) => {
   return API_SERVICE.POST<Vehicle>(API_ENDPOINTS.VEHICLES, {
-    ...body,
     id: uuidv4(),
     createdAt: new Date().toISOString(),
     lastUpdatedAt: new Date().toISOString(),
+    ...body,
   });
 };
 
