@@ -28,7 +28,6 @@ export const DATA_UI = {
     { label: "Claro", value: "light", icons: Sun },
     { label: "Oscuro", value: "dark", icons: Moon },
   ],
-
   cards_home: {
     "/vehicles": {
       description:
@@ -48,4 +47,10 @@ export const DATA_UI = {
       description: "Gestiona los usuarios del sistema.",
     },
   },
+  options_status_select: [
+    { value: "available", label: "Disponible" },
+    { value: "in_route", label: "En ruta" },
+    { value: "maintenance", label: "En mantenimiento" },
+    { value: "out_of_service", label: "Fuera de servicio" },
+  ],
 };
