@@ -11,7 +11,7 @@ export const Layout = () => {
         <section className="flex flex-row w-full">
           <Sidebar />
           <div
-            className={`w-full relative ${isSidebarOpen ? "" : "sm:ml-0 ml-12"} transition-all duration-200`}
+            className={`w-full min-w-0 relative ${isSidebarOpen ? "" : "sm:ml-0 ml-12"} transition-all duration-200`}
           >
             <button
               onClick={toggleSidebar}
