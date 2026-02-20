@@ -18,7 +18,7 @@ export const Select = ({
   ...props
 }: SelectProps) => {
   return (
-    <div className="flex flex-col gap-1 w-full mb-10">
+    <div className="flex flex-col gap-1 w-full">
       {label && (
         <label
           htmlFor={id || name}
