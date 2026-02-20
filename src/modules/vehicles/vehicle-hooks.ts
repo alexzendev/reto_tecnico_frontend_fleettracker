@@ -12,7 +12,7 @@ import type { Vehicle, VehicleFilters } from "./vehicle-types";
 const VEHICLE_KEY = [QUERY_CACHE_KEYS.VEHICLE];
 
 export const useGetVehicles = (filters?: VehicleFilters) => {
-  useQuery({
+  return useQuery({
     queryKey: [...VEHICLE_KEY, filters],
     queryFn: () => getVehiclesService(filters),
   });
