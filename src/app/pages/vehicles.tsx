@@ -125,7 +125,7 @@ export default function Vehicles() {
             </thead>
             <tbody className="divide-y divide-stone-200 dark:divide-stone-700">
               {vehicles.length === 0 ? (
-                <tr className="flex-1">
+                <tr>
                   <td colSpan={columns.length} className="text-center py-5">
                     <EmptyState message="No se encontraron vehículos" />
                   </td>
