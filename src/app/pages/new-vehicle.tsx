@@ -6,7 +6,10 @@ import {
 } from "@/modules/vehicles/vehicle-schemas";
 import { Header } from "@/shared/components/elements/header";
 import { Button } from "@/shared/components/ui/button";
+import { ButtonBack } from "@/shared/components/ui/button-back";
 import { Input } from "@/shared/components/ui/input";
+import { Select } from "@/shared/components/ui/select";
+import { DATA_UI } from "@/shared/utils/data-ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CarFront, Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -32,6 +35,7 @@ export default function NewVehicle() {
   return (
     <section className="min-h-svh flex flex-col">
       <Header title="Agregar nuevo vehículo" />
+      <ButtonBack to="/vehicles" />
       <div className="flex-1 flex items-center justify-center p-4">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -41,14 +45,14 @@ export default function NewVehicle() {
             <Input
               placeholder="KJX-482-B"
               label="Placa vehícular"
-              error={errors.placa?.message}
-              {...register("placa")}
+              error={errors.plate?.message}
+              {...register("plate")}
             />
             <Input
               placeholder="Toyota"
               label="Marca"
-              error={errors.marca?.message}
-              {...register("marca")}
+              error={errors.brand?.message}
+              {...register("brand")}
             />
           </div>
 
@@ -56,8 +60,8 @@ export default function NewVehicle() {
             <Input
               placeholder="Corolla"
               label="Modelo"
-              error={errors.modelo?.message}
-              {...register("modelo")}
+              error={errors.model?.message}
+              {...register("model")}
             />
 
             <Input
@@ -65,8 +69,8 @@ export default function NewVehicle() {
               min={0}
               placeholder="2020"
               label="Año"
-              error={errors.año?.message}
-              {...register("año")}
+              error={errors.year?.message}
+              {...register("year")}
             />
           </div>
 
@@ -83,35 +87,18 @@ export default function NewVehicle() {
               min={0}
               placeholder="15000"
               label="Kilometraje"
-              error={errors.kilometraje?.message}
-              {...register("kilometraje")}
+              error={errors.mileage?.message}
+              {...register("mileage")}
             />
           </div>
 
-          <div className="flex flex-col gap-1 w-full mb-10">
-            <label
-              htmlFor="estado"
-              className="sm:text-xs text-1.5xs uppercase font-semibold"
-            >
-              Estado
-            </label>
-            <select
-              id="estado"
-              {...register("estado")}
-              className="px-3 py-2 sm:text-xs text-1.5xs border rounded-full outline-none autofill-input dark:autofill-input-dark border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 appearance-none w-full"
-            >
-              <option value="">Selecciona un estado</option>
-              <option value="Disponible">Disponible</option>
-              <option value="En ruta">En ruta</option>
-              <option value="En mantenimiento">En mantenimiento</option>
-              <option value="Fuera de servicio">Fuera de servicio</option>
-            </select>
-            {errors.estado && (
-              <span className="sm:text-1.5xs text-2xs text-red-400 dark:text-red-600">
-                *{errors.estado.message}
-              </span>
-            )}
-          </div>
+          <Select
+            placeholder="Selecciona el estado del vehículo"
+            label="Estado"
+            error={errors.status?.message}
+            options={DATA_UI.options_status_select}
+            {...register("status")}
+          />
 
           <Button type="submit" disabled={isPending}>
             {isPending ? (
