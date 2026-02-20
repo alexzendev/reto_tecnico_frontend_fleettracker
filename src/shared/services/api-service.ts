@@ -21,7 +21,7 @@ const request = async <T>(
   method: string,
   path: string,
   options: RequestOptions = {},
-): Promise<T> => {
+): Promise<{ data: T; headers: Headers }> => {
   const { params, ...fetchOptions } = options;
   const url = buildUrl(path, params);
 
@@ -45,7 +45,8 @@ const request = async <T>(
       throw new Error(message);
     }
 
-    return response.json();
+    const data = await response.json();
+    return { data, headers: response.headers };
   } catch (error) {
     if (error instanceof TypeError) {
       toast.error("Error de red. Por favor, verifica tu conexión");
