@@ -19,7 +19,7 @@ export const Input = forwardRef<HTMLInputElement, FormInputProps>(
         )}
         <input
           ref={ref}
-          className="px-3 py-2 sm:text-xs text-1.5xs border rounded-full outline-none autofill-input dark:autofill-input-dark border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 appearance-none w-full"
+          className="px-3 py-2 sm:text-xs text-1.5xs border rounded-md outline-none autofill-input dark:autofill-input-dark border-stone-200 dark:border-stone-700 bg-stone-100 dark:bg-stone-800 appearance-none w-full"
           {...props}
         />
         {error && (
