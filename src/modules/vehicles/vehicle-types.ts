@@ -1,25 +1,25 @@
 import type { QueryParams } from "@/shared/types/api-service-types";
 
 type VehicleState =
-  | "Disponible"
-  | "En ruta"
-  | "En mantenimiento"
-  | "Fuera de servicio";
+  | "available"
+  | "in_route"
+  | "maintenance"
+  | "out_of_service";
 
 export interface Vehicle {
   id: string;
-  placa: string;
-  marca: string;
-  modelo: string;
-  año: number;
-  estado: VehicleState;
+  plate: string;
+  brand: string;
+  model: string;
+  year: number;
+  status: VehicleState;
   color: string;
-  kilometraje: number;
+  mileage: number;
 }
 
 export interface VehicleFilters extends QueryParams {
-  _page?: number;
-  _limit?: number;
-  _q?: string;
+  page?: number;
+  limit?: number;
+  q?: string;
   status?: VehicleState;
 }
