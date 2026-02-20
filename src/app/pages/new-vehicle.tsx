@@ -11,7 +11,7 @@ import { Input } from "@/shared/components/ui/input";
 import { Select } from "@/shared/components/ui/select";
 import { DATA_UI } from "@/shared/utils/data-ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CarFront, Loader } from "lucide-react";
+import { Loader } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 export default function NewVehicle() {
@@ -92,27 +92,30 @@ export default function NewVehicle() {
             />
           </div>
 
-          <Select
-            placeholder="Selecciona el estado del vehículo"
-            label="Estado"
-            error={errors.status?.message}
-            options={DATA_UI.options_status_select}
-            {...register("status")}
-          />
+          <div className="mb-10">
+            <Select
+              placeholder="Selecciona el estado del vehículo"
+              label="Estado"
+              error={errors.status?.message}
+              options={DATA_UI.options_status_select}
+              {...register("status")}
+            />
+          </div>
 
-          <Button type="submit" disabled={isPending}>
-            {isPending ? (
-              <div className="flex items-center gap-1">
-                <span>Creando vehículo</span>
-                <Loader className="animate-spin size-4" />
-              </div>
-            ) : (
-              <div className="flex items-center gap-1">
-                <span>Agregar vehículo</span>
-                <CarFront className="size-4" />
-              </div>
-            )}
-          </Button>
+          <div className="flex max-w-52 mx-auto">
+            <Button type="submit" disabled={isPending}>
+              {isPending ? (
+                <div className="flex items-center gap-1">
+                  <span>Creando vehículo</span>
+                  <Loader className="animate-spin size-4" />
+                </div>
+              ) : (
+                <div className="flex items-center gap-1">
+                  <span>Agregar vehículo</span>
+                </div>
+              )}
+            </Button>
+          </div>
         </form>
       </div>
     </section>
