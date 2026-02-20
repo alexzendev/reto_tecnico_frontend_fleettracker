@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useReactTable,
   getCoreRowModel,
@@ -6,64 +7,41 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { Header } from "@/shared/components/elements/header";
-import { Link } from "react-router-dom";
 import type { Vehicle, VehicleFilters } from "@/modules/vehicles/vehicle-types";
 import { useGetVehicles } from "@/modules/vehicles/vehicle-hooks";
 import { Input } from "@/shared/components/ui/input";
 import { Select } from "@/shared/components/ui/select";
 import { DATA_UI } from "@/shared/utils/data-ui";
-import { List, Pencil, Plus, Trash2 } from "lucide-react";
 import { Pagination } from "@/shared/components/elements/pagination";
-import { ModalDeleteVehicle } from "@/modules/vehicles/components/modal-delete-vehicle";
 
-const createColumns = (
-  onDelete: (vehicle: Vehicle) => void,
-): ColumnDef<Vehicle>[] => [
-  { accessorKey: "plate", header: "Placa" },
-  { accessorKey: "brand", header: "Marca" },
-  { accessorKey: "model", header: "Modelo" },
-  { accessorKey: "year", header: "Año" },
-  { accessorKey: "color", header: "Color" },
-  { accessorKey: "mileage", header: "Kilometraje" },
-  { accessorKey: "status", header: "Estado" },
+const createColumns: ColumnDef<Vehicle>[] = [
   {
-    id: "actions",
-    header: "Acciones",
-    cell: ({ row }) => {
-      const vehicle = row.original;
-      return (
-        <div className="flex items-center justify-center gap-1">
-          <Link
-            to={`/vehicles/${vehicle.id}`}
-            className="p-1.5 rounded text-blue-600 hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
-            title="Ver detalles"
-          >
-            <List className="size-3.5" />
-          </Link>
-          <button
-            className="p-1.5 rounded text-amber-600 hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors"
-            title="Editar"
-          >
-            <Pencil className="size-3.5" />
-          </button>
-          <button
-            onClick={() => onDelete(vehicle)}
-            className="p-1.5 rounded text-red-600 hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
-            title="Eliminar"
-          >
-            <Trash2 className="size-3.5" />
-          </button>
-        </div>
-      );
-    },
+    accessorKey: "plate",
+    header: "Placa",
+  },
+  {
+    accessorKey: "brand",
+    header: "Marca",
+  },
+  {
+    accessorKey: "model",
+    header: "Modelo",
+  },
+  {
+    accessorKey: "year",
+    header: "Año",
+  },
+  {
+    accessorKey: "status",
+    header: "Estado",
   },
 ];
 
 export default function Vehicles() {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<VehicleFilters["status"] | "">("");
   const [page, setPage] = useState(1);
-  const [vehicleToDelete, setVehicleToDelete] = useState<Vehicle | null>(null);
 
   const { data, isLoading, isError } = useGetVehicles({
     q: search,
@@ -75,7 +53,7 @@ export default function Vehicles() {
   const vehicles = data?.data ?? [];
   const totalPages = data?.totalPages ?? 1;
 
-  const columns = useMemo(() => createColumns(setVehicleToDelete), []);
+  const columns = useMemo(() => createColumns, []);
 
   const table = useReactTable({
     data: vehicles,
@@ -100,56 +78,60 @@ export default function Vehicles() {
 
     return (
       <div>
-        <table className="w-full rounded-sm border border-stone-200 dark:border-stone-700 overflow-x-auto">
-          <thead className="bg-stone-200/50 dark:bg-stone-800">
-            {table.getHeaderGroups().map((hg) => (
-              <tr
-                key={hg.id}
-                className="border-b border-stone-200 dark:border-stone-700 divide-x divide-stone-200 dark:divide-stone-700"
-              >
-                {hg.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className="sm:py-2 py-1.5 sm:text-xs text-1.5xs text-stone-600 dark:text-stone-400"
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody className="divide-y divide-stone-200 dark:divide-stone-700">
-            {vehicles.length === 0 ? (
-              <tr>
-                <td colSpan={columns.length} className="text-center py-5">
-                  No se encontraron vehículos
-                </td>
-              </tr>
-            ) : (
-              table.getRowModel().rows.map((row) => (
+        <div className="overflow-x-auto w-full">
+          <table className="w-full min-w-max rounded-sm border border-stone-200 dark:border-stone-700">
+            <thead className="bg-stone-200/50 dark:bg-stone-800">
+              {table.getHeaderGroups().map((hg) => (
                 <tr
-                  key={row.id}
-                  className="hover:bg-stone-200/30 dark:hover:bg-stone-700/30 divide-x divide-stone-200 dark:divide-stone-700 transition-colors duration-200"
+                  key={hg.id}
+                  className="border-b border-stone-200 dark:border-stone-700 divide-x divide-stone-200 dark:divide-stone-700"
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <td
-                      key={cell.id}
-                      className="sm:py-2 py-1.5 text-center sm:text-xs text-1.5xs"
+                  {hg.headers.map((header) => (
+                    <th
+                      key={header.id}
+                      className="sm:py-2 py-1.5 px-2 sm:text-xs text-1.5xs text-stone-600 dark:text-stone-400"
                     >
                       {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
+                        header.column.columnDef.header,
+                        header.getContext(),
                       )}
-                    </td>
+                    </th>
                   ))}
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+              ))}
+            </thead>
+            <tbody className="divide-y divide-stone-200 dark:divide-stone-700">
+              {vehicles.length === 0 ? (
+                <tr>
+                  <td colSpan={columns.length} className="text-center py-5">
+                    No se encontraron vehículos
+                  </td>
+                </tr>
+              ) : (
+                table.getRowModel().rows.map((row) => (
+                  <tr
+                    key={row.id}
+                    onClick={() => navigate(`/vehicles/${row.original.id}`)}
+                    className="hover:bg-stone-200/30 dark:hover:bg-stone-700/30 divide-x divide-stone-200 dark:divide-stone-700 transition-colors duration-200 cursor-pointer"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <td
+                        key={cell.id}
+                        className="sm:py-2 py-1.5 px-2 text-center sm:text-xs text-1.5xs"
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+        <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       </div>
     );
   };
@@ -164,7 +146,6 @@ export default function Vehicles() {
               to="/vehicles/new"
               className="bg-primary hover:bg-secondary text-stone-100 px-4 py-2.5 rounded-full sm:text-1.5xs text-2xs uppercase font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all duration-200 group"
             >
-              <Plus className="size-3.5 shrink-0" />
               Nuevo vehículo
             </Link>
           </div>
@@ -175,7 +156,6 @@ export default function Vehicles() {
                 label="Buscar por:"
                 placeholder="Placa, marca, modelo..."
                 value={search}
-                disabled={isLoading}
                 onChange={(e) => {
                   setSearch(e.target.value);
                   setPage(1);
@@ -188,7 +168,6 @@ export default function Vehicles() {
                 placeholder="Estado del vehículo"
                 options={DATA_UI.options_status_select}
                 value={status}
-                disabled={isLoading}
                 onChange={(e) => {
                   setStatus(e.target.value as VehicleFilters["status"]);
                   setPage(1);
@@ -199,15 +178,7 @@ export default function Vehicles() {
         </div>
 
         {renderContent()}
-
-        <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       </div>
-
-      <ModalDeleteVehicle
-        isOpen={!!vehicleToDelete}
-        onClose={() => setVehicleToDelete(null)}
-        vehicle={vehicleToDelete}
-      />
     </div>
   );
 }
