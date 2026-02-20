@@ -4,6 +4,7 @@ import { Layout } from "./app/layout/layout";
 import NotFound from "./app/pages/not-found";
 import NewVehicle from "./app/pages/new-vehicle";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "sonner";
 import { useTheme } from "./shared/hooks/useTheme";
 import CoomingSoon from "./app/pages/cooming-soon";
@@ -40,6 +41,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <Toaster richColors position="top-center" />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
