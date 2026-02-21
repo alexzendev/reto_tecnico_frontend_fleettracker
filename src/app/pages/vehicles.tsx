@@ -61,12 +61,13 @@ export default function Vehicles() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState<VehicleFilters["status"] | "">("");
   const [page, setPage] = useState(1);
+  const limit = 10;
 
   const { data, isLoading, isError } = useGetVehicles({
     q: search,
     status: status || undefined,
     page,
-    limit: 10,
+    limit: limit,
   });
 
   const vehicles = useMemo(() => {
@@ -94,10 +95,7 @@ export default function Vehicles() {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <VehiclesTableSkeleton
-          columnCount={columns.length}
-          rows={vehicles.length}
-        />
+        <VehiclesTableSkeleton columnCount={columns.length} rows={limit} />
       );
     }
 
