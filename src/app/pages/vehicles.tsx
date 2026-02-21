@@ -16,6 +16,7 @@ import { DATA_UI } from "@/shared/utils/data-ui";
 import { Pagination } from "@/shared/components/elements/pagination";
 import { EmptyState, ErrorState } from "@/shared/components/elements/states";
 import { Highlight } from "@/shared/components/ui/highlight";
+import { VehiclesTableSkeleton } from "@/shared/components/elements/skeletons";
 
 interface TableMeta {
   search: string;
@@ -92,7 +93,12 @@ export default function Vehicles() {
 
   const renderContent = () => {
     if (isLoading) {
-      return <p className="text-center py-10 text-gray-500">Cargando...</p>;
+      return (
+        <VehiclesTableSkeleton
+          columnCount={columns.length}
+          rows={vehicles.length}
+        />
+      );
     }
 
     if (isError) {
@@ -101,6 +107,11 @@ export default function Vehicles() {
 
     return (
       <div>
+        <p className="mb-2 sm:text-xs text-1.5xs">
+          <span className="font-semibold">Total:</span> {data?.total ?? 0}{" "}
+          vehículo
+          {data?.total === 1 ? "" : "s"}
+        </p>
         <div className="overflow-x-auto w-full">
           <table className="w-full min-w-max rounded-sm border border-stone-200 dark:border-stone-700">
             <thead className="bg-stone-200/50 dark:bg-stone-800">
@@ -189,7 +200,10 @@ export default function Vehicles() {
               <Select
                 label="Filtrar por:"
                 placeholder="Estado del vehículo"
-                options={DATA_UI.options_status_select}
+                options={[
+                  { value: "", label: "Todos" },
+                  ...DATA_UI.options_status_select,
+                ]}
                 value={status}
                 onChange={(e) => {
                   setStatus(e.target.value as VehicleFilters["status"]);
