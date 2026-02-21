@@ -102,7 +102,13 @@ export default function Vehicles() {
     }
 
     if (isError) {
-      return <ErrorState message="Hubo un problema al cargar los vehículos" />;
+      return (
+        <ErrorState
+          message="Hubo un problema al cargar los vehículos"
+          description="Intentalo de nuevo más tarde o recarga la página. Si el problema persiste,
+      contacta al soporte técnico."
+        />
+      );
     }
 
     return (
@@ -113,8 +119,8 @@ export default function Vehicles() {
           {data?.total === 1 ? "" : "s"}
         </p>
         <div className="overflow-x-auto w-full">
-          <table className="w-full min-w-max rounded-sm border border-stone-200 dark:border-stone-700">
-            <thead className="bg-stone-200/50 dark:bg-stone-800">
+          <table className="w-full min-w-max rounded-md border border-stone-200 dark:border-stone-700">
+            <thead className="bg-stone-200/70 dark:bg-stone-800/70">
               {table.getHeaderGroups().map((hg) => (
                 <tr
                   key={hg.id}
@@ -138,7 +144,10 @@ export default function Vehicles() {
               {vehicles.length === 0 ? (
                 <tr>
                   <td colSpan={columns.length} className="text-center py-5">
-                    <EmptyState message="No se encontraron vehículos" />
+                    <EmptyState
+                      message="No se encontraron vehículos"
+                      description="No se encontraron resultados."
+                    />
                   </td>
                 </tr>
               ) : (
@@ -146,7 +155,7 @@ export default function Vehicles() {
                   <tr
                     key={row.id}
                     onClick={() => navigate(`/vehicles/${row.original.id}`)}
-                    className="hover:bg-stone-200/30 dark:hover:bg-stone-700/30 divide-x divide-stone-200 dark:divide-stone-700 transition-colors duration-200 cursor-pointer"
+                    className="hover:bg-stone-200/40 dark:hover:bg-stone-800/40 divide-x divide-stone-200 dark:divide-stone-700 transition-colors duration-200 cursor-pointer"
                   >
                     {row.getVisibleCells().map((cell) => (
                       <td
