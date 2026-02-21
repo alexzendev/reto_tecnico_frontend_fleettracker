@@ -13,10 +13,10 @@ export const vehicleSchema = z.object({
     .min(1, "El estado es requerido")
     .pipe(
       z.enum([
-        "available",
-        "in_route",
-        "maintenance",
-        "out_of_service",
+        "Disponible",
+        "En ruta",
+        "En mantenimiento",
+        "Fuera de servicio",
       ]),
     ),
   color: z.string().min(1, "El color es requerido"),
