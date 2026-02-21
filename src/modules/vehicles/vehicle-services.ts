@@ -18,6 +18,13 @@ export const getVehiclesService = async (params?: VehicleFilters) => {
   return { data, total, totalPages: Math.ceil(total / (params?.limit ?? 10)) };
 };
 
+export const getVehicleByIdService = async (id: string) => {
+  const { data } = await API_SERVICE.GET<Vehicle>(
+    `${API_ENDPOINTS.VEHICLES}/${id}`,
+  );
+  return data;
+};
+
 export const createVehicleService = (body: Omit<Vehicle, "id">) => {
   return API_SERVICE.POST<Vehicle>(API_ENDPOINTS.VEHICLES, {
     id: uuidv4(),
