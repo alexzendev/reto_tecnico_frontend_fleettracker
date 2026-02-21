@@ -48,9 +48,9 @@ export const DATA_UI = {
     },
   },
   options_status_select: [
-    { value: "available", label: "Disponible" },
-    { value: "in_route", label: "En ruta" },
-    { value: "maintenance", label: "En mantenimiento" },
-    { value: "out_of_service", label: "Fuera de servicio" },
+    { value: "Disponible", label: "Disponible" },
+    { value: "En ruta", label: "En ruta" },
+    { value: "En mantenimiento", label: "En mantenimiento" },
+    { value: "Fuera de servicio", label: "Fuera de servicio" },
   ],
 };
