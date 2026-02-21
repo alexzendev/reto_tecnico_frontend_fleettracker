@@ -41,7 +41,6 @@ const request = async <T>(
       const errorText = await response.text();
       console.error(`[API Error ${response.status}]:`, errorText);
       const message = getErrorMessages(response.status);
-      toast.error(message);
       throw new Error(message);
     }
 
