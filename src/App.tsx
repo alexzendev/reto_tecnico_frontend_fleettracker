@@ -9,8 +9,15 @@ import { Toaster } from "sonner";
 import { useTheme } from "./shared/hooks/useTheme";
 import CoomingSoon from "./app/pages/cooming-soon";
 import Vehicles from "./app/pages/vehicles";
+import DetailsVehicle from "./app/pages/details-vehicle";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+  },
+});
 
 function App() {
   useTheme();
@@ -23,7 +30,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/vehicles" element={<Vehicles />} />
             <Route path="/vehicles/new" element={<NewVehicle />} />
-            <Route path="/vehicles/:id" element={<div>Vehicle Details</div>} />
+            <Route path="/vehicles/:id" element={<DetailsVehicle />} />
             <Route
               path="/drivers"
               element={<CoomingSoon title="Conductores" />}
