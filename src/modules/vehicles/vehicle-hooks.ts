@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   createVehicleService,
   deleteVehicleService,
+  getVehicleByIdService,
   getVehiclesService,
   updateVehicleService,
 } from "./vehicle-services";
@@ -18,6 +19,14 @@ export const useGetVehicles = (filters?: VehicleFilters) => {
   });
 };
 
+export const useGetVehicleById = (id: string) => {
+  return useQuery({
+    queryKey: [...VEHICLE_KEY, id],
+    queryFn: () => getVehicleByIdService(id),
+    enabled: !!id,
+  });
+};
+
 export const useCreateVehicle = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -25,6 +34,9 @@ export const useCreateVehicle = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: VEHICLE_KEY });
       toast.success("Vehiculo creado exitosamente");
+    },
+    onError: () => {
+      toast.error("Error al crear el vehiculo");
     },
   });
 };
@@ -38,6 +50,9 @@ export const useUpdateVehicle = () => {
       queryClient.invalidateQueries({ queryKey: VEHICLE_KEY });
       toast.success("Vehiculo actualizado exitosamente");
     },
+    onError: () => {
+      toast.error("Error al actualizar el vehiculo");
+    },
   });
 };
 
@@ -48,6 +63,9 @@ export const useDeleteVehicle = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: VEHICLE_KEY });
       toast.success("Vehiculo eliminado exitosamente");
+    },
+    onError: () => {
+      toast.error("Error al eliminar el vehiculo");
     },
   });
 };
