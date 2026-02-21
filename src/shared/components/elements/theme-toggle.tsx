@@ -1,11 +1,11 @@
 import { useTheme } from "@/shared/hooks/useTheme";
 import { Divider } from "../ui/divider";
 import { DATA_UI } from "@/shared/utils/data-ui";
-import { uiStore } from "@/shared/stores/ui-store";
+import { useUIStore } from "@/shared/stores/ui-store";
 import { Tooltip } from "../ui/tooltip";
 
 export const ThemeToggle = () => {
-  const { isSidebarOpen } = uiStore();
+  const { isSidebarOpen } = useUIStore();
   const { theme, setTheme } = useTheme();
   const { theme: buttons } = DATA_UI;
   return (

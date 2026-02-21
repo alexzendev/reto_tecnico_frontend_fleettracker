@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { uiStore } from "../stores/ui-store";
+import { useUIStore } from "../stores/ui-store";
 
 export const useTheme = () => {
-  const { theme, setTheme } = uiStore();
+  const { theme, setTheme } = useUIStore();
 
   useEffect(() => {
     const root = document.documentElement;

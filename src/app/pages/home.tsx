@@ -1,10 +1,10 @@
 import { CardLink } from "@/modules/vehicles/components/card-link";
 import { Imagotipo } from "@/shared/components/icons/imagotipo";
-import { uiStore } from "@/shared/stores/ui-store";
+import { useUIStore } from "@/shared/stores/ui-store";
 import { DATA_UI } from "@/shared/utils/data-ui";
 
 export default function Home() {
-  const { user } = uiStore();
+  const { user } = useUIStore();
   const { navigation, cards_home } = DATA_UI;
 
   return (

@@ -1,10 +1,10 @@
 import { Sidebar } from "@/shared/components/elements/sidebar";
-import { uiStore } from "@/shared/stores/ui-store";
+import { useUIStore } from "@/shared/stores/ui-store";
 import { PanelLeftClose } from "lucide-react";
 import { Outlet } from "react-router-dom";
 
 export const Layout = () => {
-  const { isSidebarOpen, toggleSidebar } = uiStore();
+  const { isSidebarOpen, toggleSidebar } = useUIStore();
   return (
     <div className="bg-stone-50 dark:bg-stone-900 text-stone-800 dark:text-stone-200">
       <main>

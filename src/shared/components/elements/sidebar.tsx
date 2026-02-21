@@ -1,4 +1,4 @@
-import { uiStore } from "@/shared/stores/ui-store";
+import { useUIStore } from "@/shared/stores/ui-store";
 import { ThemeToggle } from "./theme-toggle";
 import { Divider } from "../ui/divider";
 import { Imagotipo } from "../icons/imagotipo";
@@ -9,7 +9,7 @@ import { Tooltip } from "../ui/tooltip";
 import { NavLink } from "react-router-dom";
 
 export const Sidebar = () => {
-  const { isSidebarOpen, user } = uiStore();
+  const { isSidebarOpen, user } = useUIStore();
   const { navigation } = DATA_UI;
 
   return (

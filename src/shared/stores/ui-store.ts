@@ -23,7 +23,7 @@ interface UIStore {
 
 const user = DATA_UI.user as User;
 
-export const uiStore = create<UIStore>()(
+export const useUIStore = create<UIStore>()(
   persist(
     (set) => ({
       isSidebarOpen: true,
