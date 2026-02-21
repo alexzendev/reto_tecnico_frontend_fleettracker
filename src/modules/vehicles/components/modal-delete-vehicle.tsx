@@ -2,6 +2,7 @@ import { Modal } from "@/shared/components/ui/modal";
 import { useDeleteVehicle } from "../vehicle-hooks";
 import type { Vehicle } from "../vehicle-types";
 import { Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface ModalDeleteVehicleProps {
   isOpen: boolean;
@@ -15,12 +16,19 @@ export const ModalDeleteVehicle = ({
   vehicle,
 }: ModalDeleteVehicleProps) => {
   const { mutate: deleteVehicle, isPending } = useDeleteVehicle();
+
+  const navigate = useNavigate();
+
   const handleConfirm = () => {
     if (!vehicle) return null;
     deleteVehicle(vehicle.id, {
-      onSuccess: () => onClose(),
+      onSuccess: () => {
+        onClose();
+        navigate("/vehicles");
+      },
     });
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="w-full max-w-md">
       <div className="p-6">
