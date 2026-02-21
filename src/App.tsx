@@ -20,7 +20,7 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  useTheme();
+  const { theme } = useTheme();
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
@@ -47,7 +47,16 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-      <Toaster richColors position="top-center" />
+      <Toaster
+        position="top-right"
+        theme={theme}
+        toastOptions={{
+          classNames: {
+            toast:
+              "!bg-stone-50 dark:!bg-stone-900 !border !border-stone-200 dark:!border-stone-700 !text-stone-800 dark:!text-stone-200",
+          },
+        }}
+      />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
