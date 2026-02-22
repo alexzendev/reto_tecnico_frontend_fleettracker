@@ -53,4 +53,28 @@ export const DATA_UI = {
     { value: "En mantenimiento", label: "En mantenimiento" },
     { value: "Fuera de servicio", label: "Fuera de servicio" },
   ],
+  options_type_select: [
+    { value: "Sedán", label: "Sedán" },
+    { value: "SUV", label: "SUV" },
+    { value: "Pickup", label: "Pickup" },
+    { value: "Camión", label: "Camión" },
+    { value: "Van", label: "Van" },
+  ],
+
+  options_fuel_type_select: [
+    { value: "Gasolina", label: "Gasolina" },
+    { value: "Diésel", label: "Diésel" },
+    { value: "Eléctrico", label: "Eléctrico" },
+    { value: "Híbrido", label: "Híbrido" },
+  ],
+  options_transmission_select: [
+    { value: "Manual", label: "Manual" },
+    { value: "Automática", label: "Automática" },
+  ],
+  options_gps_status_select: [
+    { value: "Activo", label: "Activo" },
+    { value: "Inactivo", label: "Inactivo" },
+    { value: "Sin dispositivo", label: "Sin dispositivo" },
+  ],
 };
+
