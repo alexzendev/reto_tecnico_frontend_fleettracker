@@ -12,7 +12,7 @@ interface CardLinkProps {
 
 export const CardLink = ({ data }: CardLinkProps) => {
   return (
-    <div className="flex flex-col border border-stone-200 dark:border-stone-700 rounded-md lg:p-4 p-3">
+    <div className="flex flex-col bg-stone-100 dark:bg-stone-800 rounded-md lg:p-4 p-3">
       <data.icon className="size-4 shrink-0 text-primary mb-2" />
       <h2 className="font-semibold lg:text-xs text-1.5xs mb-1">{data.label}</h2>
       <p className="lg:text-1.5xs text-2xs text-stone-500 dark:text-stone-400 lg:mb-5 mb-2.5 flex-1">
