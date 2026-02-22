@@ -20,7 +20,7 @@ export default function CoomingSoon({ title }: CoomingSoonProps) {
         </p>
         <Link
           to="/"
-          className="bg-primary hover:bg-secondary text-stone-100 px-5 py-2.5 rounded-full sm:text-1.5xs text-2xs uppercase font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all duration-200 group"
+          className="sm:px-4 px-3 sm:py-2 py-1.5 rounded-full lg:text-xs sm:text-1.5xs text-2xs uppercase font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all duration-200 disabled:opacity-80 disabled:cursor-not-allowed disabled:hover:bg-primary group bg-primary hover:bg-secondary text-stone-100 group"
         >
           Volver al inicio
           <ArrowRight className="size-3.5 group-hover:-rotate-45 transition-all duration-200" />
