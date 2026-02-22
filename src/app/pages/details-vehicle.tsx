@@ -5,6 +5,7 @@ import { useGetVehicleById } from "@/modules/vehicles/vehicle-hooks";
 import { Header } from "@/shared/components/elements/header";
 import { ErrorState } from "@/shared/components/elements/states";
 import { Button } from "@/shared/components/ui/button";
+import { formatedDate } from "@/shared/utils/formated-date";
 import {
   Calendar,
   CarFront,
@@ -138,6 +139,7 @@ export default function DetailsVehicle() {
                 icon={FingerprintPattern}
                 fields={[
                   { label: "Kilometraje", value: vehicle?.mileage },
+                  { label: "Estado del GPS", value: vehicle?.gps_status },
                   { label: "Ubicación", value: vehicle?.location },
                 ]}
               />
@@ -147,23 +149,23 @@ export default function DetailsVehicle() {
                 fields={[
                   {
                     label: "Último mantenimiento",
-                    value: vehicle?.last_service,
+                    value: formatedDate(vehicle?.last_service || ""),
                   },
                   {
                     label: "Próximo mantenimiento",
-                    value: vehicle?.next_service,
+                    value: formatedDate(vehicle?.next_service || ""),
                   },
                   {
                     label: "Próximo mantenimiento (Km)",
-                    value: vehicle?.next_service_mileage,
+                    value: `${vehicle?.next_service_mileage} km`,
                   },
                   {
                     label: "Vencimiento de seguro",
-                    value: vehicle?.insurance_expiry,
+                    value: formatedDate(vehicle?.insurance_expiry || ""),
                   },
                   {
                     label: "Vencimiento de tarjeta de circulación",
-                    value: vehicle?.circulation_card_expiry,
+                    value: formatedDate(vehicle?.circulation_card_expiry || ""),
                   },
                 ]}
               />
