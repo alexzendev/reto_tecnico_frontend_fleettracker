@@ -13,6 +13,16 @@
   --text-2xs--line-height: calc(0.75 / 0.625);
 }
 
+@utility grid-orphan-3 {
+  & > *:last-child:nth-child(3n + 1) {
+    grid-column: span 3;
+  }
+
+  & > *:last-child:nth-child(3n + 2) {
+    grid-column: span 2;
+  }
+}
+
 @utility autofill-input {
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
