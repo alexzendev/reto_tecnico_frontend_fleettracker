@@ -12,7 +12,7 @@ export const Input = forwardRef<HTMLInputElement, FormInputProps>(
         {label && (
           <label
             htmlFor={props.id || props.name}
-            className="sm:text-xs text-1.5xs uppercase font-semibold"
+            className="lg:text-xs sm:text-1.5xs text-2xs font-semibold"
           >
             {label}
           </label>
