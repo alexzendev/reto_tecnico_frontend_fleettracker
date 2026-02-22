@@ -102,20 +102,18 @@ export default function NewVehicle() {
             />
           </div>
 
-          <div className="flex max-w-52 mx-auto">
-            <Button type="submit" disabled={isPending}>
-              {isPending ? (
-                <div className="flex items-center gap-1">
-                  <span>Creando vehículo</span>
-                  <Loader className="animate-spin size-4" />
-                </div>
-              ) : (
-                <div className="flex items-center gap-1">
-                  <span>Agregar vehículo</span>
-                </div>
-              )}
-            </Button>
-          </div>
+          <Button type="submit" disabled={isPending}>
+            {isPending ? (
+              <div className="flex items-center gap-1">
+                <span>Creando vehículo</span>
+                <Loader className="animate-spin size-4" />
+              </div>
+            ) : (
+              <div className="flex items-center gap-1">
+                <span>Agregar vehículo</span>
+              </div>
+            )}
+          </Button>
         </form>
       </div>
     </section>
