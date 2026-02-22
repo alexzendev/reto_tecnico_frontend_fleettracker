@@ -44,14 +44,14 @@ export const ModalDeleteVehicle = ({
           <button
             onClick={onClose}
             disabled={isPending}
-            className="px-4 py-2.5 rounded-full sm:text-1.5xs text-2xs uppercase font-semibold border border-stone-300 hover:bg-stone-100 dark:border-stone-600 dark:hover:bg-stone-800 transition-colors duration-200 disabled:opacity-50 cursor-pointer"
+            className="sm:px-4 px-3 sm:py-2 py-1.5 rounded-full lg:text-xs sm:text-1.5xs text-2xs uppercase font-semibold border border-stone-300 hover:bg-stone-100 dark:border-stone-600 dark:hover:bg-stone-800 transition-colors duration-200 disabled:opacity-50 cursor-pointer"
           >
             Cancelar
           </button>
           <button
             onClick={handleConfirm}
             disabled={isPending}
-            className="px-4 py-2.5 sm:text-1.5xs text-2xs uppercase font-semibold rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors duration-200 disabled:opacity-50 cursor-pointer"
+            className="sm:px-4 px-3 sm:py-2 py-1.5 rounded-full lg:text-xs sm:text-1.5xs text-2xs uppercase font-semibold bg-red-500 hover:bg-red-600 text-white transition-colors duration-200 disabled:opacity-50 cursor-pointer"
           >
             {isPending ? (
               <div className="flex items-center gap-2">
