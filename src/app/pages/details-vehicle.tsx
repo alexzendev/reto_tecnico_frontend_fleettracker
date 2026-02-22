@@ -6,6 +6,7 @@ import { Header } from "@/shared/components/elements/header";
 import { ErrorState } from "@/shared/components/elements/states";
 import { Button } from "@/shared/components/ui/button";
 import { formatedDate } from "@/shared/utils/formated-date";
+import { getColor } from "@/shared/utils/get-colors";
 import {
   Calendar,
   CarFront,
@@ -16,6 +17,7 @@ import {
   Loader2,
   Palette,
   Settings2,
+  Wrench,
 } from "lucide-react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -70,9 +72,9 @@ export default function DetailsVehicle() {
           </div>
 
           <div className="mt-10  flex flex-col lg:gap-4 gap-3">
-            <div className="rounded-md bg-stone-100 dark:bg-stone-800 lg:p-4 p-2">
+            <div className="rounded-md bg-stone-100 dark:bg-stone-800 lg:px-4 px-2 py-8">
               <div className="flex sm:gap-2 gap-1 items-center">
-                <CarFront className="size-6" />
+                <CarFront className="size-6 text-primary" />
                 <h2 className="font-semibold lg:text-xl sm:text-lg text-base tracking-tighter">
                   {vehicle?.brand} - {vehicle?.model}
                 </h2>
@@ -93,13 +95,17 @@ export default function DetailsVehicle() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 grid-orphan-3 gap-4">
+            <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:grid-orphan-3 gap-4">
               <DetailsCard
                 title="Información general"
                 icon={Info}
                 fields={[
                   { label: "Placa", value: vehicle?.plate },
-                  { label: "Estado", value: vehicle?.status },
+                  {
+                    label: "Estado",
+                    value: vehicle?.status,
+                    color: getColor("status", vehicle?.status || ""),
+                  },
                   { label: "Tipo de vehículo", value: vehicle?.type },
                   { label: "Departamento", value: vehicle?.department },
                   {
@@ -136,16 +142,20 @@ export default function DetailsVehicle() {
               />
               <DetailsCard
                 title="Operación"
-                icon={FingerprintPattern}
+                icon={Gauge}
                 fields={[
                   { label: "Kilometraje", value: vehicle?.mileage },
-                  { label: "Estado del GPS", value: vehicle?.gps_status },
+                  {
+                    label: "Estado del GPS",
+                    value: vehicle?.gps_status,
+                    color: getColor("gps", vehicle?.gps_status || ""),
+                  },
                   { label: "Ubicación", value: vehicle?.location },
                 ]}
               />
               <DetailsCard
                 title="Mantenimiento y documentación"
-                icon={Gauge}
+                icon={Wrench}
                 fields={[
                   {
                     label: "Último mantenimiento",
