@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@/shared/components/ui/select";
 import { DATA_UI } from "@/shared/utils/data-ui";
 import { Button } from "@/shared/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Info, Loader2, Settings2 } from "lucide-react";
 import {
   vehicleSchema,
   type VehicleFormInput,
@@ -50,68 +50,140 @@ export const ModalEditVehicle = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className="w-full max-w-lg">
-      <form onSubmit={handleSubmit(handleConfirm)} className="space-y-4 p-4">
-        <Input
-          placeholder="KJX-482-B"
-          label="Placa vehícular"
-          error={errors.plate?.message}
-          {...register("plate")}
-        />
-        <Input
-          placeholder="Toyota"
-          label="Marca"
-          error={errors.brand?.message}
-          {...register("brand")}
-        />
-        <Input
-          placeholder="Corolla"
-          label="Modelo"
-          error={errors.model?.message}
-          {...register("model")}
-        />
-        <Input
-          type="number"
-          min={0}
-          placeholder="2020"
-          label="Año"
-          error={errors.year?.message}
-          {...register("year")}
-        />
-        <Input
-          placeholder="Rojo"
-          label="Color"
-          error={errors.color?.message}
-          {...register("color")}
-        />
-        <Input
-          type="number"
-          min={0}
-          placeholder="15000"
-          label="Kilometraje"
-          error={errors.mileage?.message}
-          {...register("mileage")}
-        />
-        <Select
-          placeholder="Selecciona el estado del vehículo"
-          label="Estado"
-          error={errors.status?.message}
-          options={DATA_UI.options_status_select}
-          {...register("status")}
-        />
-        <Button type="submit" disabled={isPending}>
-          {isPending ? (
-            <div className="flex items-center gap-1">
-              <span>Editando vehículo</span>
-              <Loader2 className="animate-spin size-4" />
+    <Modal isOpen={isOpen} onClose={onClose} className="w-full max-w-2xl">
+      <div className="p-6">
+        <form onSubmit={handleSubmit(handleConfirm)} className="space-y-5">
+          <div>
+            <div className="flex sm:gap-2 gap-1 items-center mb-3">
+              <Info className="shrink-0 size-4 text-primary" />
+              <h3 className="font-semibold lg:text-sm sm:text-xs text-1.5xs uppercase tracking-tighter">
+                Información general
+              </h3>
             </div>
-          ) : (
-            <div className="flex items-center gap-1">
-              <span>Editar vehículo</span>
+            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+              <Input
+                placeholder="KJX-482-B"
+                label="Placa"
+                error={errors.plate?.message}
+                {...register("plate")}
+              />
+              <Select
+                placeholder="Selecciona el estado del vehículo"
+                label="Estado"
+                error={errors.status?.message}
+                options={DATA_UI.options_status_select}
+                {...register("status")}
+              />
             </div>
-          )}
-        </Button>
-      </form>
+            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+              <Select
+                placeholder="Tipo de vehículo"
+                label="Tipo de vehículo"
+                error={errors.type?.message}
+                options={DATA_UI.options_type_select}
+                {...register("type")}
+              />
+              <Input
+                placeholder="Logística"
+                label="Departamento"
+                error={errors.department?.message}
+                {...register("department")}
+              />
+            </div>
+            <Input
+              placeholder="Juan Pérez"
+              label="Conductor asignado"
+              error={errors.driver?.message}
+              {...register("driver")}
+            />
+          </div>
+
+          <div>
+            <div className="flex sm:gap-2 gap-1 items-center mb-3">
+              <Settings2 className="shrink-0 size-4 text-primary" />
+              <h3 className="font-semibold lg:text-sm sm:text-xs text-1.5xs uppercase tracking-tighter">
+                Especificaciones del vehículo
+              </h3>
+            </div>
+            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+              <Input
+                placeholder="Mazda"
+                label="Marca"
+                error={errors.brand?.message}
+                {...register("brand")}
+              />
+              <Input
+                placeholder="CX-5"
+                label="Modelo"
+                error={errors.model?.message}
+                {...register("model")}
+              />
+            </div>
+            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+              <Input
+                type="number"
+                placeholder="1900"
+                label="Año"
+                error={errors.year?.message}
+                {...register("year")}
+              />
+              <Input
+                placeholder="Rojo"
+                label="Color"
+                error={errors.color?.message}
+                {...register("color")}
+              />
+            </div>
+            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+              <Input
+                type="number"
+                placeholder="5"
+                label="Asientos"
+                error={errors.seats?.message}
+                {...register("seats")}
+              />
+              <Input
+                type="number"
+                placeholder="4"
+                label="Puertas"
+                error={errors.doors?.message}
+                {...register("doors")}
+              />
+            </div>
+            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+              <Select
+                placeholder="Tipo de combustible"
+                label="Tipo de combustible"
+                error={errors.fuel_type?.message}
+                options={DATA_UI.options_fuel_type_select}
+                {...register("fuel_type")}
+              />
+              <Select
+                placeholder="Tipo de transmisión"
+                label="Tipo de transmisión"
+                error={errors.transmission?.message}
+                options={DATA_UI.options_transmission_select}
+                {...register("transmission")}
+              />
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <Button type="submit" disabled={isPending}>
+              {isPending ? (
+                <div className="flex items-center gap-1">
+                  <span>Editando vehículo</span>
+                  <Loader2 className="animate-spin size-4" />
+                </div>
+              ) : (
+                <div className="flex items-center gap-1">
+                  <span>Editar vehículo</span>
+                </div>
+              )}
+            </Button>
+          </div>
+        </form>
+      </div>
     </Modal>
   );
 };
