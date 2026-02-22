@@ -69,8 +69,8 @@ export default function DetailsVehicle() {
             </Button>
           </div>
 
-          <div className="mt-10">
-            <div className="rounded-md border border-stone-200 dark:border-stone-700 lg:p-4 p-2">
+          <div className="mt-10  flex flex-col lg:gap-4 gap-3">
+            <div className="rounded-md bg-stone-100 dark:bg-stone-800 lg:p-4 p-2">
               <div className="flex sm:gap-2 gap-1 items-center">
                 <CarFront className="size-6" />
                 <h2 className="font-semibold lg:text-xl sm:text-lg text-base tracking-tighter">
@@ -93,7 +93,7 @@ export default function DetailsVehicle() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 grid-orphan-3 gap-4">
               <DetailsCard
                 title="Información general"
                 icon={Info}
