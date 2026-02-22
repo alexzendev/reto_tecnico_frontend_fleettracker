@@ -24,7 +24,7 @@ export const DetailsCard = ({
           {title}
         </h2>
       </div>
-      <div className="grid grid-cols-2 sm:gap-3 gap-2 mt-3">
+      <div className="grid grid-cols-2 sm:gap-3.5 gap-3 mt-5">
         {fields.map((field) => (
           <div key={field.label}>
             <h3 className="lg:text-xs text-1.5xs font-semibold uppercase">
