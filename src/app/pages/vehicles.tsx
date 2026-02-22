@@ -185,7 +185,7 @@ export default function Vehicles() {
           <div className="flex justify-end">
             <Link
               to="/vehicles/new"
-              className="bg-primary hover:bg-secondary text-stone-100 px-4 py-2.5 rounded-full sm:text-1.5xs text-2xs uppercase font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all duration-200 group"
+              className="sm:px-4 px-3 sm:py-2 py-1.5 rounded-full lg:text-xs sm:text-1.5xs text-2xs bg-primary hover:bg-secondary text-stone-100 uppercase font-semibold flex items-center justify-center gap-1 cursor-pointer transition-all duration-200 group"
             >
               Nuevo vehículo
             </Link>
