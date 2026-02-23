@@ -8,7 +8,7 @@ export default function Home() {
   const { navigation, cards_home } = DATA_UI;
 
   return (
-    <div className="flex flex-col min-h-svh items-center justify-center px-4">
+    <div className="flex flex-col min-h-svh items-center justify-center p-4">
       <Imagotipo className="w-32 mb-10" />
       <p className="lg:text-base sm:text-base text-sm text-center font-medium tracking-tighter">
         ¡Hola!, {user?.name} 👋🏻
