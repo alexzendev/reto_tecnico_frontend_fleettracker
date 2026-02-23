@@ -144,7 +144,10 @@ export default function DetailsVehicle() {
                 title="Operación"
                 icon={Gauge}
                 fields={[
-                  { label: "Kilometraje", value: vehicle?.mileage },
+                  {
+                    label: "Kilometraje",
+                    value: `${vehicle?.mileage?.toLocaleString("es-MX") || 0} km`,
+                  },
                   {
                     label: "Estado del GPS",
                     value: vehicle?.gps_status,
@@ -167,7 +170,7 @@ export default function DetailsVehicle() {
                   },
                   {
                     label: "Próximo mantenimiento (Km)",
-                    value: `${vehicle?.next_service_mileage} km`,
+                    value: `${vehicle?.next_service_mileage?.toLocaleString("es-MX") || 0} km`,
                   },
                   {
                     label: "Vencimiento de seguro",
@@ -175,7 +178,9 @@ export default function DetailsVehicle() {
                   },
                   {
                     label: "Vencimiento de tarjeta de circulación",
-                    value: formatDateLong(vehicle?.circulation_card_expiry || ""),
+                    value: formatDateLong(
+                      vehicle?.circulation_card_expiry || "",
+                    ),
                   },
                 ]}
               />
