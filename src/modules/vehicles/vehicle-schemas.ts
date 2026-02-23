@@ -53,24 +53,39 @@ export const vehicleSchema = z.object({
     .string()
     .min(1, "La fecha del último servicio es requerida")
     .pipe(z.coerce.date())
-    .transform((date) => date.toISOString()),
+    .transform((date) => {
+      date.setUTCHours(12, 0, 0, 0);
+      return date.toISOString();
+    }),
 
   next_service: z
     .string()
     .min(1, "La fecha de próximo servicio es requerida")
     .pipe(z.coerce.date())
-    .transform((date) => date.toISOString()),
+    .transform((date) => {
+      date.setUTCHours(12, 0, 0, 0);
+      return date.toISOString();
+    }),
+
   next_service_mileage: z.coerce.number().min(0),
+
   insurance_expiry: z
     .string()
     .min(1, "El vencimiento del seguro es requerido")
     .pipe(z.coerce.date())
-    .transform((date) => date.toISOString()),
+    .transform((date) => {
+      date.setUTCHours(12, 0, 0, 0);
+      return date.toISOString();
+    }),
+
   circulation_card_expiry: z
     .string()
     .min(1, "El vencimiento de la tarjeta de circulación es requerido")
     .pipe(z.coerce.date())
-    .transform((date) => date.toISOString()),
+    .transform((date) => {
+      date.setUTCHours(12, 0, 0, 0);
+      return date.toISOString();
+    }),
 });
 
 export type VehicleFormInput = z.input<typeof vehicleSchema>;
