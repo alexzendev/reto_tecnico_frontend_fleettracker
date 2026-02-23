@@ -49,13 +49,28 @@ export const vehicleSchema = z.object({
     .min(1, "El estado del GPS es requerido")
     .pipe(z.enum(["Activo", "Inactivo", "Sin dispositivo"])),
 
-  last_service: z.string().min(1, "La fecha del último servicio es requerida"),
-  next_service: z.string().min(1, "La fecha de próximo servicio es requerida"),
+  last_service: z
+    .string()
+    .min(1, "La fecha del último servicio es requerida")
+    .pipe(z.coerce.date())
+    .transform((date) => date.toISOString()),
+
+  next_service: z
+    .string()
+    .min(1, "La fecha de próximo servicio es requerida")
+    .pipe(z.coerce.date())
+    .transform((date) => date.toISOString()),
   next_service_mileage: z.coerce.number().min(0),
-  insurance_expiry: z.string().min(1, "El vencimiento del seguro es requerido"),
+  insurance_expiry: z
+    .string()
+    .min(1, "El vencimiento del seguro es requerido")
+    .pipe(z.coerce.date())
+    .transform((date) => date.toISOString()),
   circulation_card_expiry: z
     .string()
-    .min(1, "El vencimiento de la tarjeta de circulación es requerido"),
+    .min(1, "El vencimiento de la tarjeta de circulación es requerido")
+    .pipe(z.coerce.date())
+    .transform((date) => date.toISOString()),
 });
 
 export type VehicleFormInput = z.input<typeof vehicleSchema>;
