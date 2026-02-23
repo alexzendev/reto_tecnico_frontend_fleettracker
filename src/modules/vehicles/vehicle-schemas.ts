@@ -39,13 +39,17 @@ const vehicleBaseSchema = z.object({
   vin: z.string().min(1, "El VIN es requerido"),
   engine_number: z.string().min(1, "El número de motor es requerido"),
   license_state: z.string().min(1, "El estado de las placas es requerido"),
-  mileage: z.coerce.number().min(0, "El kilometraje no puede ser negativo"),
+  mileage: z.coerce
+    .number()
+    .min(0, "El kilometraje debe ser mayor o igual a 0"),
   location: z.string().min(1, "La ubicación es requerida"),
   gps_status: z
     .string()
     .min(1, "El estado del GPS es requerido")
     .pipe(z.enum(["Activo", "Inactivo", "Sin dispositivo"])),
-  next_service_mileage: z.coerce.number().min(0),
+  next_service_mileage: z.coerce
+    .number()
+    .min(0, "El próximo mantenimiento en km debe ser mayor o igual a 0"),
 });
 
 const datFields = {
