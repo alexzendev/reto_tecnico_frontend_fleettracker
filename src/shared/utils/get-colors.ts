@@ -1,4 +1,4 @@
-const DEFAULT_COLOR = "bg-gray-100 text-gray-800";
+const DEFAULT_COLOR = "bg-stone-500";
 
 const COLORS = {
   status: {
