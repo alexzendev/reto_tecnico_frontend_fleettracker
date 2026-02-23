@@ -22,14 +22,14 @@ export const Pagination = ({ page, totalPages, setPage }: PaginationProps) => {
       <div className="flex gap-1">
         <button
           onClick={() => setPage(1)}
-          disabled={page === 1}
+          disabled={page <= 1}
           className="flex items-center gap-0.5 sm:p-2 p-1 rounded-md bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 disabled:opacity-40 disabled:cursor-default cursor-pointer"
         >
           <ChevronsLeft className="size-3.5" />
         </button>
         <button
-          onClick={() => setPage((p) => p - 1)}
-          disabled={page === 1}
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          disabled={page <= 1}
           className="flex items-center gap-0.5 sm:p-2 p-1 rounded-md bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 disabled:opacity-40 disabled:cursor-default cursor-pointer"
         >
           <ChevronLeft className="sm:size-3.5 size-3" />
@@ -39,8 +39,8 @@ export const Pagination = ({ page, totalPages, setPage }: PaginationProps) => {
         </button>
 
         <button
-          onClick={() => setPage((p) => p + 1)}
-          disabled={page === totalPages}
+          onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+          disabled={page >= totalPages}
           className="flex items-center gap-0.5 sm:p-2 p-1 rounded-md bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 disabled:opacity-40 disabled:cursor-default cursor-pointer"
         >
           <span className="text-2xs uppercase font-semibold sm:flex hidden">
@@ -50,7 +50,7 @@ export const Pagination = ({ page, totalPages, setPage }: PaginationProps) => {
         </button>
         <button
           onClick={() => setPage(totalPages)}
-          disabled={page === totalPages}
+          disabled={page >= totalPages}
           className="flex items-center gap-0.5 sm:p-2 p-1 rounded-md bg-stone-100 dark:bg-stone-800 border border-stone-200 dark:border-stone-700 disabled:opacity-40 disabled:cursor-default cursor-pointer"
         >
           <ChevronsRight className="size-3.5" />
