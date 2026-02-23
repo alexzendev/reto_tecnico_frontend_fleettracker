@@ -20,6 +20,7 @@ import {
   type VehicleFormInput,
   type VehicleFormOutput,
 } from "../vehicle-schemas";
+import { formatDateInput } from "@/shared/utils/formated-date";
 
 interface ModalEditVehicleProps {
   isOpen: boolean;
@@ -38,7 +39,17 @@ export const ModalEditVehicle = ({
     formState: { errors },
   } = useForm<VehicleFormInput, unknown, VehicleFormOutput>({
     resolver: zodResolver(vehicleSchema),
-    defaultValues: vehicle ?? undefined,
+    defaultValues: vehicle
+      ? {
+          ...vehicle,
+          last_service: formatDateInput(vehicle.last_service),
+          next_service: formatDateInput(vehicle.next_service),
+          insurance_expiry: formatDateInput(vehicle.insurance_expiry),
+          circulation_card_expiry: formatDateInput(
+            vehicle.circulation_card_expiry,
+          ),
+        }
+      : undefined,
   });
 
   const { mutate: editVehicle, isPending } = useUpdateVehicle();
@@ -57,11 +68,11 @@ export const ModalEditVehicle = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className="w-full max-w-3xl">
+    <Modal isOpen={isOpen} onClose={onClose} className="w-full max-w-4xl">
       <div className="p-6">
         <form
           onSubmit={handleSubmit(handleConfirm)}
-          className="space-y-5 overflow-y-auto max-h-[80vh]"
+          className="space-y-5 overflow-y-auto max-h-[80vh] scrollbar-thin pr-3"
         >
           <div>
             <div className="flex sm:gap-2 gap-1 items-center mb-3">
