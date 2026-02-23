@@ -7,7 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Select } from "@/shared/components/ui/select";
 import { DATA_UI } from "@/shared/utils/data-ui";
 import { Button } from "@/shared/components/ui/button";
-import { Info, Loader2, Settings2 } from "lucide-react";
+import {
+  Fingerprint,
+  Gauge,
+  Info,
+  Loader2,
+  Settings2,
+  Wrench,
+} from "lucide-react";
 import {
   vehicleSchema,
   type VehicleFormInput,
@@ -50,9 +57,12 @@ export const ModalEditVehicle = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} className="w-full max-w-2xl">
+    <Modal isOpen={isOpen} onClose={onClose} className="w-full max-w-3xl">
       <div className="p-6">
-        <form onSubmit={handleSubmit(handleConfirm)} className="space-y-5">
+        <form
+          onSubmit={handleSubmit(handleConfirm)}
+          className="space-y-5 overflow-y-auto max-h-[80vh]"
+        >
           <div>
             <div className="flex sm:gap-2 gap-1 items-center mb-3">
               <Info className="shrink-0 size-4 text-primary" />
@@ -60,7 +70,7 @@ export const ModalEditVehicle = ({
                 Información general
               </h3>
             </div>
-            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2">
               <Input
                 placeholder="KJX-482-B"
                 label="Placa"
@@ -74,8 +84,6 @@ export const ModalEditVehicle = ({
                 options={DATA_UI.options_status_select}
                 {...register("status")}
               />
-            </div>
-            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
               <Select
                 placeholder="Tipo de vehículo"
                 label="Tipo de vehículo"
@@ -89,13 +97,13 @@ export const ModalEditVehicle = ({
                 error={errors.department?.message}
                 {...register("department")}
               />
+              <Input
+                placeholder="Juan Pérez"
+                label="Conductor asignado"
+                error={errors.driver?.message}
+                {...register("driver")}
+              />
             </div>
-            <Input
-              placeholder="Juan Pérez"
-              label="Conductor asignado"
-              error={errors.driver?.message}
-              {...register("driver")}
-            />
           </div>
 
           <div>
@@ -105,7 +113,7 @@ export const ModalEditVehicle = ({
                 Especificaciones del vehículo
               </h3>
             </div>
-            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2">
               <Input
                 placeholder="Mazda"
                 label="Marca"
@@ -118,8 +126,6 @@ export const ModalEditVehicle = ({
                 error={errors.model?.message}
                 {...register("model")}
               />
-            </div>
-            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
               <Input
                 type="number"
                 placeholder="1900"
@@ -133,8 +139,6 @@ export const ModalEditVehicle = ({
                 error={errors.color?.message}
                 {...register("color")}
               />
-            </div>
-            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
               <Input
                 type="number"
                 placeholder="5"
@@ -149,8 +153,6 @@ export const ModalEditVehicle = ({
                 error={errors.doors?.message}
                 {...register("doors")}
               />
-            </div>
-            <div className="flex md:flex-row flex-col lg:gap-4 gap-2 mb-3">
               <Select
                 placeholder="Tipo de combustible"
                 label="Tipo de combustible"
@@ -164,6 +166,111 @@ export const ModalEditVehicle = ({
                 error={errors.transmission?.message}
                 options={DATA_UI.options_transmission_select}
                 {...register("transmission")}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex sm:gap-2 gap-1 items-center mb-3">
+              <Fingerprint className="shrink-0 size-4 text-primary" />
+              <h3 className="font-semibold lg:text-sm sm:text-xs text-1.5xs uppercase tracking-tighter">
+                Identificación
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2">
+              <Input
+                placeholder="1HGCM82633A004352"
+                label="VIN"
+                error={errors.vin?.message}
+                {...register("vin")}
+              />
+              <Input
+                placeholder="CX-5"
+                label="Número de motor"
+                error={errors.engine_number?.message}
+                {...register("engine_number")}
+              />
+              <Input
+                placeholder="Guadalajara, Jalisco"
+                label="Entidad emisora de la licencia"
+                error={errors.license_state?.message}
+                {...register("license_state")}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex sm:gap-2 gap-1 items-center mb-3">
+              <Gauge className="shrink-0 size-4 text-primary" />
+              <h3 className="font-semibold lg:text-sm sm:text-xs text-1.5xs uppercase tracking-tighter">
+                Operación
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2 mb-3">
+              <Input
+                placeholder="8500"
+                label="Kilometraje"
+                error={errors.mileage?.message}
+                {...register("mileage")}
+              />
+              <Select
+                placeholder="Selecciona el estado del GPS"
+                label="Estado del GPS"
+                error={errors.gps_status?.message}
+                options={DATA_UI.options_gps_status_select}
+                {...register("gps_status")}
+              />
+              <Input
+                placeholder="Guadalajara, Jalisco"
+                label="Ubicación"
+                error={errors.location?.message}
+                {...register("location")}
+              />
+            </div>
+          </div>
+
+          <div>
+            <div className="flex sm:gap-2 gap-1 items-center mb-3">
+              <Wrench className="shrink-0 size-4 text-primary" />
+              <h3 className="font-semibold lg:text-sm sm:text-xs text-1.5xs uppercase tracking-tighter">
+                Mantenimiento y documentación
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-4 gap-2 mb-3">
+              <Input
+                type="date"
+                placeholder="2025-03-15"
+                label="Último mantenimiento"
+                error={errors.last_service?.message}
+                {...register("last_service")}
+              />
+              <Input
+                type="date"
+                placeholder="2025-03-15"
+                label="Próximo mantenimiento"
+                error={errors.next_service?.message}
+                {...register("next_service")}
+              />
+              <Input
+                type="number"
+                placeholder="15000"
+                label="Próximo mantenimiento (Km)"
+                error={errors.next_service_mileage?.message}
+                {...register("next_service_mileage")}
+              />
+              <Input
+                type="date"
+                placeholder="2025-03-15"
+                label="Vencimiento de seguro"
+                error={errors.insurance_expiry?.message}
+                {...register("insurance_expiry")}
+              />
+              <Input
+                type="date"
+                placeholder="2025-03-15"
+                label="Vencimiento de tarjeta de circulación"
+                error={errors.circulation_card_expiry?.message}
+                {...register("circulation_card_expiry")}
               />
             </div>
           </div>
