@@ -46,8 +46,8 @@ export default function NewVehicle() {
       <Header title="Agregar nuevo vehículo" />
       <ButtonBack to="/vehicles" />
       <div className="flex-1 flex items-center justify-center">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit(onSubmit)} className="sm:p-4 p-2 w-full">
+          <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
             <div className="rounded-md bg-stone-100 dark:bg-stone-800 lg:p-4 p-2">
               <div className="flex sm:gap-2 gap-1 items-center mb-3">
                 <Info className="shrink-0 size-4 text-primary" />
@@ -270,12 +270,12 @@ export default function NewVehicle() {
             <Button type="submit" disabled={isPending}>
               {isPending ? (
                 <div className="flex items-center gap-1">
-                  <span>Creando vehículo</span>
+                  <span>Guardando vehículo</span>
                   <Loader2 className="animate-spin size-4" />
                 </div>
               ) : (
                 <div className="flex items-center gap-1">
-                  <span>Agregar vehículo</span>
+                  <span>Guardar vehículo</span>
                 </div>
               )}
             </Button>
