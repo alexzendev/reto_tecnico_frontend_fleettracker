@@ -18,7 +18,7 @@ export const vehicleSchema = z.object({
     .min(1, "El tipo de vehículo es requerido")
     .pipe(z.enum(["Sedán", "SUV", "Pickup", "Camión", "Van"])),
   department: z.string().min(1, "El departamento es requerido"),
-  driver: z.string().nullable().default(null),
+  driver: z.string().min(1, "El conductor es requerido"),
 
   brand: z.string().min(1, "La marca es requerida"),
   model: z.string().min(1, "El modelo es requerido"),
@@ -49,7 +49,7 @@ export const vehicleSchema = z.object({
     .min(1, "El estado del GPS es requerido")
     .pipe(z.enum(["Activo", "Inactivo", "Sin dispositivo"])),
 
-  last_service: z.string().nullable().default(null),
+  last_service: z.string().min(1, "La fecha del último servicio es requerida"),
   next_service: z.string().min(1, "La fecha de próximo servicio es requerida"),
   next_service_mileage: z.coerce.number().min(0),
   insurance_expiry: z.string().min(1, "El vencimiento del seguro es requerido"),
