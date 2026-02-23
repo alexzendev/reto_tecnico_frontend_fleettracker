@@ -5,7 +5,7 @@ import { useGetVehicleById } from "@/modules/vehicles/vehicle-hooks";
 import { Header } from "@/shared/components/elements/header";
 import { ErrorState } from "@/shared/components/elements/states";
 import { Button } from "@/shared/components/ui/button";
-import { formatedDate } from "@/shared/utils/formated-date";
+import { formatDateLong } from "@/shared/utils/formated-date";
 import { getColor } from "@/shared/utils/get-colors";
 import {
   Calendar,
@@ -159,11 +159,11 @@ export default function DetailsVehicle() {
                 fields={[
                   {
                     label: "Último mantenimiento",
-                    value: formatedDate(vehicle?.last_service || ""),
+                    value: formatDateLong(vehicle?.last_service || ""),
                   },
                   {
                     label: "Próximo mantenimiento",
-                    value: formatedDate(vehicle?.next_service || ""),
+                    value: formatDateLong(vehicle?.next_service || ""),
                   },
                   {
                     label: "Próximo mantenimiento (Km)",
@@ -171,11 +171,11 @@ export default function DetailsVehicle() {
                   },
                   {
                     label: "Vencimiento de seguro",
-                    value: formatedDate(vehicle?.insurance_expiry || ""),
+                    value: formatDateLong(vehicle?.insurance_expiry || ""),
                   },
                   {
                     label: "Vencimiento de tarjeta de circulación",
-                    value: formatedDate(vehicle?.circulation_card_expiry || ""),
+                    value: formatDateLong(vehicle?.circulation_card_expiry || ""),
                   },
                 ]}
               />
