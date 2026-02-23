@@ -15,12 +15,12 @@ import {
   Settings2,
   Wrench,
 } from "lucide-react";
-import {
-  vehicleSchema,
-  type VehicleFormInput,
-  type VehicleFormOutput,
-} from "../vehicle-schemas";
 import { formatDateInput } from "@/shared/utils/formated-date";
+import {
+  vehicleEditSchema,
+  type VehicleEditInput,
+  type VehicleEditOutput,
+} from "../vehicle-schemas";
 
 interface ModalEditVehicleProps {
   isOpen: boolean;
@@ -37,8 +37,8 @@ export const ModalEditVehicle = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<VehicleFormInput, unknown, VehicleFormOutput>({
-    resolver: zodResolver(vehicleSchema),
+  } = useForm<VehicleEditInput, unknown, VehicleEditOutput>({
+    resolver: zodResolver(vehicleEditSchema),
     defaultValues: vehicle
       ? {
           ...vehicle,
@@ -54,7 +54,7 @@ export const ModalEditVehicle = ({
 
   const { mutate: editVehicle, isPending } = useUpdateVehicle();
 
-  const handleConfirm = (formData: VehicleFormOutput) => {
+  const handleConfirm = (formData: VehicleEditOutput) => {
     if (!vehicle) return;
 
     editVehicle(
@@ -290,12 +290,12 @@ export const ModalEditVehicle = ({
             <Button type="submit" disabled={isPending}>
               {isPending ? (
                 <div className="flex items-center gap-1">
-                  <span>Editando vehículo</span>
+                  <span>Actualizando vehículo</span>
                   <Loader2 className="animate-spin size-4" />
                 </div>
               ) : (
                 <div className="flex items-center gap-1">
-                  <span>Editar vehículo</span>
+                  <span>Actualizar vehículo</span>
                 </div>
               )}
             </Button>
